@@ -11,7 +11,7 @@ then
 fi
 
 #is the file a week old?
-PREV=$(grep -m 1 "Mon \|Tue \|Wed \|Thur \|Fri \|Sat \|Sun Jul" $FILENAME)
+PREV=$(grep -m 1 "Mon \|Tue \|Wed \|Thu \|Fri \|Sat \|Sun Jul" $FILENAME)
 PREV_NOTE_DAY=$(date -j -f "%a %b %d %Y" "$PREV" "+%j")
 PREV_NOTE_WEEK=$(date -j -f "%a %b %d %Y" "$PREV" "+%V")
 
@@ -23,7 +23,7 @@ DELTA_WEEK=$(($NEW_NOTE_WEEK-$PREV_NOTE_WEEK))
 DELTA_DAY=$(($NEW_NOTE_DAY-$PREV_NOTE_DAY))
 
 #if the file is older than 1 week we archive it and create a new one
-if [ $DELTA_WEEK -gt -1 ]
+if [ $DELTA_WEEK -gt 0 ]
 then
     DELTA_DAY=0
     ARCHIVE_FILENAME=`date +"%b_%d_%Y_$FILENAME"` 
