@@ -1,6 +1,8 @@
 #!/bin/bash
+# quick_notes is a note taking tool. it timestamps and archives notes in a folder
+# usage: ./quick_notes.sh <filename>
 
-FILENAME=$1 #"standup.txt"
+FILENAME=$1
 
 #if file does not exist create it
 if [ ! -f $FILENAME ]
