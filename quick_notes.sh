@@ -54,4 +54,7 @@ fi
 
 #open file up and put cursor on line 2
 # need to move curor to new line
-vim +2 $FILENAME
+#enable spell check with this command:
+# :setlocal spell spelllang=en_us
+vim +2 +":setlocal spell spelllang=en_us" $FILENAME
+
