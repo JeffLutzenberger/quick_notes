@@ -14,6 +14,13 @@ fi
 
 #is the file a week old?
 PREV=$(grep -m 1 "Mon \|Tue \|Wed \|Thu \|Fri \|Sat \|Sun Jul" $FILENAME)
+#if, for some reason, prev is not found
+if [ ! -z "$PREV" ] 
+then
+    PREV=`date +"%a %b %d %Y"`
+    echo $PREV >> $FILENAME
+    echo "---" >> $FILENAME
+fi   
 PREV_NOTE_DAY=$(date -j -f "%a %b %d %Y" "$PREV" "+%j")
 PREV_NOTE_WEEK=$(date -j -f "%a %b %d %Y" "$PREV" "+%V")
 
@@ -28,7 +35,7 @@ DELTA_DAY=$(($NEW_NOTE_DAY-$PREV_NOTE_DAY))
 if [ $DELTA_WEEK -gt 0 ]
 then
     DELTA_DAY=0
-    ARCHIVE_FILENAME=`date +"%b_%d_%Y_$FILENAME"` 
+    ARCHIVE_FILENAME=`date +"$FILENAME.%m_%d_%Y"` 
     #if the archive file exists we append to it, otherwise we create it and 
     #make a clean version of the active file
     if [ -f  $ARCHIVE_FILENAME ]
@@ -38,7 +45,7 @@ then
         cat $ARCHIVE_FILENAME $FILENAME > $ARCHIVE_FILENAME
     else    
         mv $FILENAME $ARCHIVE_FILENAME
-        echo "archiving the $FILENAME"
+        echo "archiving $FILENAME"
         date +"%a %b %d %Y" >> $FILENAME
         echo "---" >> $FILENAME
     fi
@@ -58,5 +65,6 @@ fi
 # need to move curor to new line
 #enable spell check with this command:
 # :setlocal spell spelllang=en_us
+# spell check pegs cpu on my mac...
 vim +2 +":setlocal spell spelllang=en_us" $FILENAME
 
