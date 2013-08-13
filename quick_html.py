@@ -21,6 +21,11 @@ def read_notes(dir_name):
     out_file.write('</style></head>')
 
     for root, dirs, files in os.walk(dir_name):
+        #newer to older
+        files.reverse()
+        #last file is the current file (does not have date appended) so we
+        #move that one to the top
+        files.insert(0, files.pop())
         for f in files:
             fullpath = os.path.join(root, f)
             print fullpath
