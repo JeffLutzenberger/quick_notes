@@ -12,17 +12,17 @@ then
     echo "---" >> $FILENAME
 fi
 
-#is the file a week old?
+#get the last date in the file
 PREV=$(grep -m 1 "Mon \|Tue \|Wed \|Thu \|Fri \|Sat \|Sun Jul" $FILENAME)
-#echo $PREV
 #if, for some reason, prev is not found
-#if [ ! -z $PREV ] 
-#then
-#    PREV=`date +"%a %b %d %Y"`
-#    echo $PREV >> $FILENAME
-#    echo "---" >> $FILENAME
-#fi
-#echo $PREV
+if [ "$PREV" == "" ] 
+then
+    date +"%a %b %d %Y" >> $FILENAME
+    echo "---" >> $FILENAME
+fi
+
+PREV=$(grep -m 1 "Mon \|Tue \|Wed \|Thu \|Fri \|Sat \|Sun Jul" $FILENAME)
+
 PREV_NOTE_DAY=$(date -j -f "%a %b %d %Y" "$PREV" "+%j")
 PREV_NOTE_WEEK=$(date -j -f "%a %b %d %Y" "$PREV" "+%V")
 

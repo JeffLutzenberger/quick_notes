@@ -15,7 +15,13 @@ def read_notes(dir_name):
 
     out_file_path = dir_name + 'notes.html'
     # open the file and overwrite if it exists
-    out_file = open(out_file_path, 'r+')
+    #if os.path.exists(out_file_path):
+    #    print("file found")
+    #    out_file = file(out_file_path, "r+")
+    #else:
+    #    print("creating file")
+    out_file = file(out_file_path, "w")
+    #out_file = open(out_file_path, 'r+')
     out_file.write('<head><style>')
     out_file.write('body {font-family:arial}')
     out_file.write('</style></head>')
