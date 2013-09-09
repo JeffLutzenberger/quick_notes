@@ -25,16 +25,23 @@ def read_notes(dir_name):
     #move that one to the top
     files.insert(0, files.pop())
     for f in files:
-        f = open(dir_name + '/' + f, 'r')
-        out_file.write(markdown(f.read()))
-        out_file.write('<hr>')
+        print f
+        try:
+            f = open(dir_name + '/' + f, 'r')
+            out_file.write(markdown(f.read()))
+            out_file.write('<hr>')
+        except:
+            print "Parsing {} failed".format(f)
 
-    # if we're overwriting truncate the file so that we don't end up with
+    # if we're overwriting, truncate the file so that we don't end up with
     # extra old text
     out_file.truncate()
     out_file.close()
     print out_file_path
     call(["open", out_file_path])
+    update_command = "appcfg.py update"
+    print update_command
+    call(["appcfg.py", "update", dir_name])
 
 
 def main(argv):

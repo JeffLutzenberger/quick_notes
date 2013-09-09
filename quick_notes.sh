@@ -33,6 +33,8 @@ NEW_NOTE_WEEK=$(date -j -f "%a %b %d %T %Z %Y" "$NOW" "+%V")
 DELTA_WEEK=$(($NEW_NOTE_WEEK-$PREV_NOTE_WEEK))
 DELTA_DAY=$(($NEW_NOTE_DAY-$PREV_NOTE_DAY))
 
+echo $DELTA_WEEK
+
 #if the file is older than 1 week we archive it and create a new one
 if [ $DELTA_WEEK -gt 0 ]
 then
